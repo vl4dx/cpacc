@@ -1,0 +1,48 @@
+[
+   {
+      "ID":"1",
+      "REGION":"PUNO",
+      "PROVINCIA":"AZANGARO",
+      "DISTRITO":"ARAPA",
+      "LOCALIDAD":"VILLA BETANZOS",
+      "CANAL_TV":"7",
+      "PONTENCIA_TV":"50 W",
+      "INSTALACION":"2003",
+      "X_COORD":"-70.14555556",
+      "Y_COORD":"-15.15138889",
+      "ESTADO":"INEXISTENTE",
+      "OBSERVACION":"SIN TRANSFERENCIA",
+      "COMENTARIO_POR_LOCALIDAD":"año tras año los equipos no han sido transferidos, la propiedad esta en problemas. Se sugiere enviar una carta notarial para que entregue los equipos.",
+      "REQUERIMIENTO_DE_MANTENIMIENTO":"requiere traslado de torre y pintado de torre y una nueva instalacion de puesta a tierra."
+   },
+   {
+      "ID":"2",
+      "REGION":"PUNO",
+      "PROVINCIA":"AZANGARO",
+      "DISTRITO":"ASILLO",
+      "LOCALIDAD":"PROGRESO",
+      "CANAL_TV":"12",
+      "PONTENCIA_TV":"50 W",
+      "INSTALACION":"2003",
+      "X_COORD":"-70.36055556",
+      "Y_COORD":"-14.68611111",
+      "ESTADO":"INOPERATIVO",
+      "OBSERVACION":"TRASLADO DE TORRE",
+      "COMENTARIO_POR_LOCALIDAD":"los equipos se encuentran internados en nuestra oficina. Solicitaron traslado de torre y ant. Parbolica",
+      "REQUERIMIENTO_DE_MANTENIMIENTO":"requiere traslado y pintado de torre y una nueva instalacion de puesta a tierra."
+   },
+   {
+      "ID":"3",
+      "REGION":"PUNO",
+      "PROVINCIA":"AZANGARO",
+      "DISTRITO":"AZANGARO",
+      "LOCALIDAD":"AZANGARO",
+      "CANAL_TV":"5",
+      "PONTENCIA_TV":"25 W",
+      "INSTALACION":"1996",
+      "X_COORD":"-70.19916667",
+      "Y_COORD":"-14.9125",
+      "ESTADO":"OPERATIVO",
+      "COMENTARIO_POR_LOCALIDAD":"el equipo que emite TvPeru es de mismo Tv Peru."
+   }
+]
