@@ -27,7 +27,7 @@ Route::get('encargado/create/{station_id}', 'EncargadoController@create');
 
 Route::get('/', function () {
 
-return dd(public_path());
+//return dd(public_path());
     return view('inicio');
 });
 

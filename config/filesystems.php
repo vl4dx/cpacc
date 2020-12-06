@@ -50,7 +50,7 @@ return [
 
         'public' => [
             'driver' => 'local',
-            'root' => 'C:\laragon\www\Telecomunicaciones\vladimir', 
+            'root' => env('STATIONS'), 
             //'root' => public_path(),
             'url' => env('APP_URL').'/storage',
             //
