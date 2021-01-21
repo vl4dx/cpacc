@@ -164,11 +164,14 @@
 			  </tr>
 			  <tr>
 			    <td><strong>Foto</strong></td>
-			    <td align="center">				
+			    <td align="center">	
+
 			    	<figure align="center" >
 						<img id="myImg" src="{{url('stations/')}}/{{ $station->id }}/main.jpg" class="figure-img img-fluid rounded ">
 						<figcaption  class="figure-caption">Foto de la estacion de {{$station->localidad}}</figcaption>
 					</figure>
+
+					<a href="/photo/{{$station->id}}/edit"  class="btn  btn-block btn-sm btn-outline-primary">ACTUALIZAR</a>	
 				</td>
 			  </tr>
 			</tbody>
