@@ -4,7 +4,9 @@
 
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item active" aria-current="page">LISTADO DE ESTACIONES CPACC</li>
+    <li class="breadcrumb-item"><a href="/home">INICIO</a></li>
+    <li class="breadcrumb-item"><a href="/channeltv">LISTADO POR CANALES</a></li>
+    <li class="breadcrumb-item active" aria-current="page">LISTADO DE CANAL {{$canal}}</li>
   </ol>
 </nav> 
 

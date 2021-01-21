@@ -4,7 +4,9 @@
 
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item active" aria-current="page">LISTADO DE ESTACIONES CPACC</li>
+    <li class="breadcrumb-item"><a href="/home">INICIO</a></li>
+    <li class="breadcrumb-item"><a href="/cpacc">TIPO DE CPACC</a></li>
+    <li class="breadcrumb-item active" aria-current="page">LISTADO POR CPACC</li>
   </ol>
 </nav> 
 

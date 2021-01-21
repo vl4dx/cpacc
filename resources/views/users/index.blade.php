@@ -66,6 +66,17 @@
               </tbody>
             </table>
           
+
+          	          	<div class="row">
+	          		<div class="col-md-5"></div>
+	          		<div class="col-md-2">
+	          			<a  href="/users/create"  class="btn btn-secondary btn-block">
+						<i class="fas fa-plus-circle"></i></a>
+	          		</div>
+	          		<div class="col-md-5"></div>
+	          		
+	          	</div>
+
         </div>
       </div>
 

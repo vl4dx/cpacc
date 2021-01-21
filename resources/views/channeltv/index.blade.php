@@ -1,12 +1,11 @@
 @extends('plantilla.index')
 
-
-
 @section('tittle')
 
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item active" aria-current="page">LISTADO DE CANALES ESTACIONES CPACC</li>
+    <li class="breadcrumb-item"><a href="/home">INICIO</a></li>
+    <li class="breadcrumb-item active" aria-current="page">LISTADO POR CANALES</li>
   </ol>
 </nav> 
 

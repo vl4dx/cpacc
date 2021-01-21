@@ -143,7 +143,7 @@ class StationController extends Controller
 
     
 
-        return redirect('/station');
+        return redirect('/station/'.$id)->with('success', 'Cambios Guardados');
     }
 
     /**
@@ -154,6 +154,12 @@ class StationController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        $contact = Station::find($id);
+        
+        $contact->delete();
+
+        //dd($contact);
+        return redirect('/station')->with('success', 'Contact deleted!');
     }
 }

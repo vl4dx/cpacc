@@ -40,41 +40,68 @@
     </script>
 @endsection
 
+@section('tittle')
 
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/home">INICIO</a></li>
+    <li class="breadcrumb-item"><a href="/station">CPACC</a></li>
+    <li class="breadcrumb-item"><a href="/station/{{$station->id}}">{{$station->localidad}}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">EDITAR</li>
+  </ol>
+</nav> 
+
+@endsection
 
 @section('content')
 
 
 
-<body  onload="initialize();">
+<body   onload="initialize();">
 
 <form  class="mt-2" action="{{url('map')}}/{{$station->id}}" method="POST">
 
-  @method('PATCH')
-   @csrf
+    @method('PATCH')
+    @csrf
 
-    <label for="latitude">
-        Localidad de <strong>{{$station->localidad}}</strong>, Latitude:
-    </label>
-    <input name="latitud" id="txtLat" type="text" style="color:red" value="{{$station->longitud}}" />
-    <label for="longitude">
-        Longitude:
-    </label>
-    <input name="longitud" id="txtLng" type="text" style="color:red" value="{{$station->latitud}}" />
-    <button type="submit" class="btn btn-primary btn-sm ">GUARDAR</button>
-    <br>
-    <div id="map_canvas" style="width: auto; height: 600px;">
+<div class="row">
+    
+    <div class="col-md-5">
+        <div class="row col-sm-12"><strong> LOCALIDAD DE {{$station->localidad}} </strong></div>
+        <br>
+
+            <div class="form-group row">
+                <label class="col-form-label col-4" for="latitude"><strong>LATITUD</strong></label>
+                <div class="col-8">
+                <input class="form-control form-control-sm" name="latitud" id="txtLat" type="text" value="{{$station->longitud}}" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-form-label col-4" for="longitude"><strong>LONGITUD</strong></label>
+                <div class="col-8">
+                <input class="form-control form-control-sm" name="longitud" id="txtLng" type="text" value="{{$station->latitud}}" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-form-label col-4" for="altitude"><strong>ALTITUD</strong></label>
+                <div class="col-8">
+                <input class="form-control form-control-sm" name="altitude"  type="text" value="{{$station->altitud}}" />
+                </div>
+            </div>
+            <button type="submit" class="btn btn-block btn-primary btn-sm ">GUARDAR</button>
     </div>
 
+    <div class="col-md-7">
+        <div id="map_canvas" style="width: auto; height: 75vh;"></div>
+    </div>
+
+</div>
 
 </form>
 
 </body>
-
-<div  class="row col-md-12">
-    
-</div>
-
 
 
 @endsection

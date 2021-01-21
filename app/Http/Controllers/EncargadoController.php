@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Station;
 use App\Estado;
 use App\Cpacc;
+use App\Encargado;
 
 
 class EncargadoController extends Controller
@@ -36,9 +37,31 @@ class EncargadoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+
+    if (Auth::user()->cargo == 'admin' )
+        {
+
+            //dd($request->all());
+        $encargado = New Encargado;
+        $encargado->cpacc_id = $id;
+        $encargado->nombre = request()->nombre;
+        $encargado->cargo = request()->cargo;
+        $encargado->celular = request()->celular;
+
+        
+
+        $encargado->save();
+            
+
+        return redirect('/encargado/'.$id);
+        }            
+        
+        else 
+        {
+            abort(403, 'No tiene acceso');
+        }
     }
 
     /**
@@ -62,7 +85,19 @@ class EncargadoController extends Controller
      */
     public function edit($id)
     {
-        //
+        if (Auth::user()->cargo == 'admin' || Auth::user()->cargo == 'editor' )
+        {
+        
+        $encargado = Encargado::find($id);
+        
+
+        return view('encargado.edit',['encargado'=>$encargado]);
+        }            
+        
+        else 
+        {
+            abort(403, 'No tiene acceso');
+        }
     }
 
     /**
@@ -74,7 +109,26 @@ class EncargadoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+
+        $encargado = Encargado::find($id);
+        
+
+        //($request);
+
+        $encargado->nombre = request()->nombre;
+        $encargado->cargo = request()->cargo;
+        $encargado->celular = request()->celular;
+
+
+        
+         $encargado->save();
+
+    
+
+        return redirect('/encargado/'.$encargado->cpacc_id)->with('success', 'Cambios Guardados en el ID:'.$encargado->id);
+
+
     }
 
     /**
@@ -85,6 +139,12 @@ class EncargadoController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        $contact = Encargado::find($id);
+        $cpacc=$contact->cpacc_id;
+        $contact->delete();
+
+        //dd($contact);
+        return redirect('/encargado/'.$cpacc)->with('success', 'Contact deleted!');
     }
 }

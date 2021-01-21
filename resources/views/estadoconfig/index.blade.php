@@ -48,7 +48,7 @@
 	          			<a  href="/estadoconfig/create"  class="btn btn-secondary btn-block">
 						<i class="fas fa-plus-circle"></i></a>
 	          		</div>
-	          		<div class="col-md-5"></div
+	          		<div class="col-md-5"></div>
 	          		
 	          	</div>
 

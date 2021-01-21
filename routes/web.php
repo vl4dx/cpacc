@@ -23,7 +23,7 @@ Route::resource('encargado','EncargadoController');
 Route::resource('cpacc','CpaccController');
 Route::resource('photo','PhotoController');
 
-Route::get('encargado/create/{station_id}', 'EncargadoController@create');
+Route::post('encargado/crear/{station_id}', 'EncargadoController@store');
 
 // Route::get('/', function () {
 

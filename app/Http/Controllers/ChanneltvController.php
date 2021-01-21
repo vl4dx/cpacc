@@ -77,7 +77,7 @@ class ChanneltvController extends Controller
         //dd($stations[1]->estadoModel->nombre);
         //dd($estacionesOperativas);
         //$station = Station::find($id);
-        return view('channeltv.show',['stations'=>$stations,'canales'=>$Channels]);
+        return view('channeltv.show',['stations'=>$stations,'canales'=>$Channels,'canal'=>$id]);
     }
 
 

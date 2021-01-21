@@ -4,7 +4,8 @@
 
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item active" aria-current="page">LISTADO DE ESTACIONES CPACC</li>
+    <li class="breadcrumb-item"><a href="/home">INICIO</a></li>
+    <li class="breadcrumb-item active" aria-current="page">ESTACIONES CPACC</li>
   </ol>
 </nav> 
 
@@ -43,6 +44,7 @@
 				<div class="card-body py-2">
 
 					<div class="row">
+						<div class="col-md-1">Id</div>
 						<div class="col-md-2">Localidad</div>
 						<div class="col-md-2">Distrito</div>
 						<div class="col-md-2">Provincia</div>
@@ -68,7 +70,51 @@
 
 					<div   class="row ">
 
-						
+						<div class="col-md-3">
+
+							<div class=" d-lg-none row">
+
+
+								<div class="col-12 p-0">
+									<a href="/station/{{$station->id}}" class="btn btn-sm btn-block btn-secondary text-left" >
+										<span class="badge badge-dark">{{ $station->id }}</span> -
+										@php
+										$len=strlen($station->localidad);
+										if($len>=15){echo '<small>'.$station->localidad.'</small>';}
+										else {echo $station->localidad;}
+										@endphp
+									</a>
+								</div>
+
+							</div>
+
+
+							<div class="d-none d-lg-block ">
+
+								<div class="row">
+
+								<div class="col-3">
+									<a href="/station/{{$station->id}}" class="btn btn-sm btn-block btn-outline-dark " >
+									{{$station->id}}
+									</a>
+								</div>
+
+								<div class="col-9">
+									<a href="/station/{{$station->id}}" class="btn btn-sm btn-block btn-outline-dark text-left" >
+										@php
+										$len=strlen($station->localidad);
+										if($len>=15){echo '<small>'.$station->localidad.'</small>';}
+										else {echo $station->localidad;}
+										@endphp
+									</a>
+								</div>
+
+								</div>
+
+							</div>
+
+						</div>
+{{--
 						<div class="col-md-2 p-0">
 							<a href="/station/{{$station->id}}" class="btn btn-sm btn-block btn-secondary text-left" >
 								<span class="badge badge-dark">{{ $station->id }}</span> -
@@ -80,6 +126,7 @@
 							</a>
 
 						</div>
+--}}
 							<div class="col-md-2">
 									{{$station->distrito}}
 							</div>

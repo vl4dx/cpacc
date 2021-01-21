@@ -1,11 +1,13 @@
 @extends('plantilla.index')
 
 
-
 @section('tittle')
 
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/home">INICIO</a></li>
+    <li class="breadcrumb-item"><a href="/station">ESTACIONES CPACC</a></li>
+    <li class="breadcrumb-item"><a href="/station/{{$localidad->id}}">LOCALIDAD DE {{$localidad->localidad}}</a></li>
     <li class="breadcrumb-item active" aria-current="page">EDITAR</li>
   </ol>
 </nav> 
@@ -13,14 +15,7 @@
 @endsection
 
 @section('content')
-    <style>
-      #map {
-        height: 500px;  /* The height is 400 pixels */
-        width: 100%;  /* The width is the width of the web page */
-       }
 
-
-    </style>
 
 <form  action="{{url('station')}}/{{$localidad->id}}" method="POST" files="true" enctype="multipart/form-data">
 
@@ -31,20 +26,13 @@
 	<div class="col-lg-6 col-mb-6" > 
 
 		<div class="card">
-			<div class="card-header">
 
-				<div class="row">
-					<div class="col-lg-6 col-mb-6"><h6 class="m-0 font-weight-bold text-primary">Datos</h6></div>
-					<div class="col-lg-6 col-mb-6"><a href="/photo/{{$localidad->id}}/edit"  class="btn btn-block btn-sm btn-info">Subir foto</a></div>
-				</div>
-
-			</div>
-
+			<div class="card-header"><h6 class="m-0 font-weight-bold text-primary">Datos</h6></div>
 			<div class="card-body">
 
 				<div class="row">
-					<div class="col-lg-6 col-mb-6" >
 
+					<div class="col-lg-6 col-mb-6" >
 
 						  <div class="form-group row  ">
 						    <label for="region" class="col-4 col-form-label"><strong>Region</strong> </label>
@@ -61,7 +49,6 @@
 						  </div>
 
 					</div>
-
 
 					<div class="col-lg-6 col-mb-6" > 
 
@@ -181,80 +168,21 @@
 
     	<br>
 
-		<div class="card">
-			<div class="card-header"><h6 class="m-0 font-weight-bold text-primary">Observaciones</h6></div>
-
-			<div class="card-body">
-				<textarea name="observacion" class="form-control" rows="5">{{$localidad->observacion}}</textarea>
-			</div>
-    	</div>
-
-    	<br>
-
-
-
-
 			
 
 	</div>
 
 	<div class="col-lg-6 col-mb-6" > 
-		<div class="card">
-			<div class="card-header">
-				<div class="row">
-					<div class="col-lg-6 col-mb-6"><h6 class="m-0 font-weight-bold text-primary">Coordenadas</h6></div>
-					<div class="col-lg-6 col-mb-6"><a href="/map/{{$localidad->id}}/edit"  class="btn btn-block btn-sm btn-success">Actualizar datos de Gps</a></div>
-				</div>
-				
-			</div>
-			<div class="card-body">
-					<table class="table table-bordered text-xs table-sm">
-
-					<tbody>
-					  <tr>
-					    <td>Latitud</td>
-					    <td align="right">{{$localidad->latitud}}</td>
-					  </tr>
-					  <tr>
-					    <td>Longitud</td>
-					    <td align="right">{{$localidad->longitud}}</td>
-					  </tr>
-					  <tr>
-					    <td>Altitud</td>
-					    <td align="right">{{$localidad->altitud}} msnm</td>
-					  </tr>
-					</tbody>
-					</table>
-
-				</div>
-
-		</div>
-
-		<br>
 
 		<div class="card">
-			<div class="card-header"><h6 class="m-0 font-weight-bold text-primary">Encargado</h6></div>
+			<div class="card-header"><h6 class="m-0 font-weight-bold text-primary">Observaciones</h6></div>
 
 			<div class="card-body">
-
-						  <div class="form-group row">
-						    <label for="encargado" class="col-4 col-form-label"><strong>Nombre</strong> </label>
-						    <div class="col-8">
-						      <input type="text" class="form-control " name="encargado" value="{{$localidad->encargado}}" placeholder="Ingresar Nombre del encargado">
-						    </div>
-						  </div>
-
-
-						  <div class="form-group row">
-						    <label for="celular" class="col-4 col-form-label"><strong>Celular</strong> </label>
-						    <div class="col-8">
-						      <input type="text" class="form-control " name="celular" value="{{$localidad->celular}}" placeholder="Ingresar  celular del encargado">
-						    </div>
-						  </div>
+				<textarea name="observacion" class="form-control" rows="3">{{$localidad->observacion}}</textarea>
 			</div>
-		</div>
+    	</div>
 
-		<br>
+    	<br>
 
 		<div class="card">
 			<div class="card-header"><h6 class="m-0 font-weight-bold text-primary">Requerimiento</h6></div>
@@ -278,6 +206,13 @@
               	<button type="submit" class="btn btn-primary btn-lg btn-block">GUARDAR</button>
                 
               </div>
+<br>
+<br>
+			<form action="{{ url('station')}}/{{$localidad->id}}" method="post">
+              @csrf
+              @method('DELETE')
+              <button onclick="return confirm('Esta seguro de borrar?')" class="btn btn-sm btn-danger " type="submit">Delete</button>
+            </form>
 
 		</div>
 		</div>
@@ -290,7 +225,5 @@
 
 </form>
 
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxnHk5EmsN-MnL5w10U08A0iP4qPM2tmQ&callback=initMap">
-    </script>
+
 @endsection

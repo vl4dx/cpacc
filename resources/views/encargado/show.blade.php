@@ -1,12 +1,30 @@
-@extends('template.layout')
+@extends('plantilla.index')
 
-@section('tittle','ESTACION DE '.$station->localidad)
+@section('tittle')
+
+
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/home">INICIO</a></li>
+    <li class="breadcrumb-item"><a href="/station">LISTA DE ESTACIONES CPACC</a></li>
+    <li class="breadcrumb-item"><a href="/station/{{$station->id}}">LOCALIDAD DE {{$station->localidad}}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">ENCARGADOS</li>
+  </ol>
+</nav> 
+
+@endsection
+
 
 @section('content')
 
-@if (count($station->listaEncargadosModel) === 0)
-	<div class="box-header with-border"><h3 class="box-title">no hay registros</h3></div>
-@else
+<div class="col-mb-12">
+  @if(session()->get('success'))
+    <div class="alert alert-success " role="alert">
+      {{ session()->get('success') }}  
+    </div>
+  @endif
+</div>
 
 	<div class="row">
 
@@ -14,77 +32,154 @@
 
 		<div class="col-md-8">
 
-		    <div class="card shadow mb-4">
+		<div class="d-none d-md-block ">{{--Ocultar en mobile--}}
+			<div class="card mb-2" >
+				<div class="card-body py-2">
 
-		        <div class="card-header"><h6 class="m-0 font-weight-bold text-primary">Lista de Encargados</h6></div>
+					<div class="row">
+						<div class="col-md-1"><strong>ID</strong></div>
+						<div class="col-md-3"><strong>Nombre</strong></div>
+						<div class="col-md-3"><strong>Cargo</strong></div>
+						<div class="col-md-3"><strong>Celular</strong></div>
+						<div class="col-md-2"><strong>Editar</strong></div>
 
-		        <div class="card-body ">
+					</div>
 
-		        	<div class="row m-2">
+				</div>
+			</div>
+		</div>{{--Ocultar en mobile--}}
 
-		        		<div class="col-md-4">
-		        			<div class="p-2 bg-gray-300"><strong>Nombre</strong></div>
-		        		</div>
+@if (count($station->listaEncargadosModel) === 0)
 
-		        		<div class="col-md-3">
-		        			<div class="p-2 bg-gray-300"><strong>Cargo</strong></div>
-		        		</div>
+	<div class="card mb-2" >
+		<div class="card-body py-2">
 
-		        		<div class="col-md-3 ">
-		        			<div class="p-2 bg-gray-300">Celular</div>
-		        		</div>
+			<div class="row">
+				<div class="col-md-12">no hay registros</div>
+			</div>
 
-		        		<div class="col-md-2">
-							<div class="p-2 bg-gray-300">Edit</div>
-						</div>					
-				    </div>
+		</div>
+	</div>
 
+@else
 
-		        	@foreach ($station->listaEncargadosModel as $lista)
-		        	<div class="row m-2">
+		@foreach ($station->listaEncargadosModel as $lista)
 
-		        		<div class="col-md-4">
-		        			<div class="btn btn-block text-left">{{$lista->nombre}}</div>
-		        		</div>
+			<div class="card mb-2 " >
+				<div class="card-body py-2">
 
-		        		<div class="col-md-3 ">
-		        			<div class="btn btn-block">{{$lista->cargo}}</div>
-		        		</div>
+					<div class="row">
+						<div class="col-md-1 d-none d-md-block">
+							{{$lista->id}}
 
-		        		<div class="col-md-3 ">
-		        			<div class="btn btn-block">{{$lista->celular}}</div>
-		        		</div>
+							
+						</div>
 
-		        		<div class="col-md-2">
-							<a  href="/estadoconfig/{{$station->id}}/edit"  class="btn btn-warning btn-block">
-							<i class="fas fa-edit"></i></a>					
-				    </div>
+						<div class="col-md-3 text-uppercase">
+							
+									{{$lista->nombre}}
+	
+						</div>
 
-		          	</div>
-		          	@endforeach
+						<div class="col-md-3 text-uppercase mb-1 ">
+							{{$lista->cargo}}
+							
+						</div>
 
-		          	<br>
+						<div class="col-md-3 mb-1">
+							<a class="btn btn-sm btn-block btn-outline-success " href="tel:{{$lista->celular}}" >
+							   <i class="fas fa-phone-square-alt"></i> {{$lista->celular}}
+							</a>
+
+						</div>
+						<div class="col-md-2">
+			
+									<a  href="/encargado/{{$lista->id}}/edit"  class="btn btn-sm btn-warning btn-block">
+																<i class="fas fa-edit"></i></a>	
+				
+							
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+		@endforeach
+@endif
+
+		          	
 		          	{{-- Boton --}}
 		          	<div class="row">
 		          		<div class="col-md-5"></div>
 		          		<div class="col-md-2">
-		          			<a  href="/encargado/create/6"  class="btn btn-secondary btn-block">
-							<i class="fas fa-plus-circle"></i></a>
+
+							<button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#exampleModal{{$station->id}}">
+							  <i class="fas fa-plus"></i>
+							</button>
+
+
+							<form  action="{{url('encargado')}}/crear/{{$station->id}}" method="POST">
+							
+							@csrf
+
+								<div class="modal fade" id="exampleModal{{$station->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+								  <div class="modal-dialog" role="document">
+								    <div class="modal-content">
+
+								      <div class="modal-header">
+								        <h5 class="modal-title" id="exampleModalLabel"><strong>Agregar Encargado - {{$station->localidad}}</strong></h5>
+								        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								          <span aria-hidden="true">&times;</span>
+								        </button>
+								      </div>
+
+								      <div class="modal-body">
+
+										<div class="form-group form-control-sm row">
+							                  <label class="col-form-label col-sm-4" for="region"><strong>Nombre</strong> </label>
+							                  <div class="col-sm-8">
+							                    <input  type="text"  class="form-control form-control-sm" name="nombre"  required="required" pattern="[A-Za-z0-9]{1,20}" placeholder="Ingresar Nombre" >
+							                  </div>
+										</div>
+
+										<div class="form-group form-control-sm row">
+							                  <label class="col-form-label col-sm-4" for="nombre"><strong>Cargo</strong> </label>
+							                  <div class="col-sm-8">
+							                    <input  type="text" class="form-control form-control-sm" name="cargo"  required="required" pattern="[A-Za-z0-9]{1,20}"  placeholder="Ingresar Cargo">
+							                  </div>
+										</div>
+
+										<div class="form-group form-control-sm row">
+							                  <label class="col-form-label col-sm-4" for="nombre"><strong>Celular</strong> </label>
+							                  <div class="col-sm-8">
+							                    <input  type="text" class="form-control form-control-sm" name="celular"  required="required" pattern="[A-Za-z0-9]{1,20}" placeholder="Ingresar Celular">
+							                  </div>
+										</div>
+
+								      <div class="modal-footer">
+								      	<button type="submit" class="btn btn-primary btn-lg btn-block">GUARDAR</button>
+								        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+								      </div>
+
+								    </div>
+								  </div>
+								</div>
+
+							</div>
+
+							</form>
+
 		          		</div>
+		          		
 		          		<div class="col-md-5"></div>
 		          		
 		          	</div>
-
-		        </div>
-
-		    </div>
 
 	    </div>
 
 	    <div class="col-md-2"></div>
 	</div>
 
-@endif
 
 
 @endsection

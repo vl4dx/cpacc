@@ -1,5 +1,6 @@
 @extends('plantilla.index')
 
+
 @section('css')
  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
@@ -10,9 +11,21 @@
    crossorigin=""></script>
 @endsection
 
+@section('tittle')
 
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/home">INICIO</a></li>
+    <li class="breadcrumb-item"><a href="/station">ESTACIONES CPACC</a></li>
+    <li class="breadcrumb-item active" aria-current="page">LOCALIDAD DE {{$station->localidad}} </li>
+  </ol>
+</nav> 
+
+@endsection
 
 @section('content')
+
+
 
 
 <div id="myModal" class="modal">
@@ -108,14 +121,22 @@
 }
 </style>
 
-<br>
+
+<div class="col-mb-12">
+  @if(session()->get('success'))
+    <div class="alert alert-success " role="alert">
+      {{ session()->get('success') }}  
+    </div>
+  @endif
+</div>
+
 <div class="row">
 	<div class="col-lg-12 col-mb-12"  >
 
 	<div class="card">
-		<div class="card-header">
+		<div class="card-header ">
 			<div class="row">
-				<div class="col-lg-10 col-mb-10">Localidad de {{$station->localidad}}</div>
+				<div class="col-lg-10 col-mb-10">LOCALIDAD DE {{$station->localidad}}</div>
 				<div class="col-lg-2 col-mb-2"><a href="/station/{{$station->id}}/edit"  class="btn btn-block btn-sm btn-success">EDITAR</a></div>
 			</div>
 		</div>
@@ -143,10 +164,12 @@
 			  </tr>
 			  <tr>
 			    <td><strong>Foto</strong></td>
-			    <td align="center">				<figure align="center" >
-			<img id="myImg" src="{{url('stations/')}}/{{ $station->id }}/main.jpg" class="figure-img img-fluid rounded " alt="Foto de la estacion de {{$station->localidad}}">
-			<figcaption  class="figure-caption">Foto de la estacion de {{$station->localidad}}</figcaption>
-		</figure></td>
+			    <td align="center">				
+			    	<figure align="center" >
+						<img id="myImg" src="{{url('stations/')}}/{{ $station->id }}/main.jpg" class="figure-img img-fluid rounded ">
+						<figcaption  class="figure-caption">Foto de la estacion de {{$station->localidad}}</figcaption>
+					</figure>
+				</td>
 			  </tr>
 			</tbody>
 			</table>
@@ -175,27 +198,37 @@
 					    <td align="right">{{$station->frecuencyfm_id}}</td>
 					  </tr>
 					  <tr>
-					  	<td><strong>Encargado</strong></td>
+					  	<td>
+					  		<strong>Encargado </strong>
+					  	</td>
+					  	<td>
+					  		<a href="/encargado/{{$station->id}}"  class="btn  btn-block btn-sm btn-outline-primary">ACTUALIZAR</a>
+					  	</td>
+					  </tr>
+					  <tr>
+					  	<td><strong>Nombre </strong></td>
 
-					  	<td align="left">
-
-					  	<div class="row">
-					  		<div class="col-md-8">
-						  		@isset($station->listaEncargadosModel->last()->nombre)
-								    {{$station->listaEncargadosModel->last()->nombre}}
-								@endisset
-					  			
-					  		</div>
-					  		<div class="col-md-2"> <a href="/encargado/{{$station->id}}"  class="btn  text-xs btn-sm btn-warning">VER</a></div>
-					  		<div class="col-md-2"></div>
-					  	</div>
-					    
-					  
+					  	<td align="right">
+							  		@isset($station->listaEncargadosModel->last()->nombre)
+									    {{$station->listaEncargadosModel->last()->nombre}}
+									@endisset
 						</td>
 					  </tr>
 					  <tr>
+					    <td><strong>Cargo</strong></td>
+					    <td align="right">
+							  		@isset($station->listaEncargadosModel->last()->cargo)
+									    {{$station->listaEncargadosModel->last()->cargo}}
+									@endisset
+					    </td>
+					  </tr>
+					  <tr>
 					    <td><strong>Celular</strong></td>
-					    <td align="right">{{$station->celular}}</td>
+					    <td align="right">
+							  		@isset($station->listaEncargadosModel->last()->celular)
+									    {{$station->listaEncargadosModel->last()->celular}}
+									@endisset
+					    </td>
 					  </tr>
 					  <tr>
 					    <td><strong>Observaciones</strong></td>
@@ -212,44 +245,28 @@
 					</tbody>
 				</table>
 
-
-{{--$station->listaEncargadosModel->last()->nombre--}}
-				<table class="table table-bordered text-xs table-sm">
-
-					<tbody>
-
-@foreach ($station->listaEncargadosModel as $lista)
-
-
-
-
-					  <tr>
-					    <td><strong>{{$lista->nombre}}</strong></td>
-					    <td align="right">{{ $lista->celular }}</td>
-					  </tr>
-@endforeach
-					</tbody>
-				</table>
-
 		</div>
 		<div class="col-lg-4 col-mb-4"  > 
-
-
 
 
 					<table class="table table-bordered text-xs table-sm">
 
 					<tbody>
 					  <tr>
-					    <td>Latitud</td>
+					    <td><strong>Coordenadas</strong></td>
+					    <td align="right"><a href="/map/{{$station->id}}/edit" class="btn btn-block btn-sm btn-outline-primary">Actualizar</a></td>
+					  </tr>
+
+					  <tr>
+					    <td><strong>Latitud</strong></td>
 					    <td align="right">{{$station->latitud}}</td>
 					  </tr>
 					  <tr>
-					    <td>Longitud</td>
+					    <td><strong>Longitud</strong></td>
 					    <td align="right">{{$station->longitud}}</td>
 					  </tr>
 					  <tr>
-					    <td>Altitud</td>
+					    <td><strong>Altitud</strong></td>
 					    <td align="right">{{$station->altitud}} msnm</td>
 					  </tr>
 					</tbody>

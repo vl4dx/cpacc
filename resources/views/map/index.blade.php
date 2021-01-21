@@ -12,17 +12,15 @@
 
 
 
-
-
 @section('content')
 
 
 
-<div class="row mt-2">
+<div class="row mt-1">
 
 	<div class="col-md-1"></div>
 	<div class="col-md-10">
-				<div id="mapid" style="width: 100%; height: 600px;"></div>
+				<div id="mapid" style="width: auto; height: 85vh;"></div>
 					<script>
 
 var primary = new L.Icon({
@@ -90,14 +88,14 @@ var dark = new L.Icon({
 
 				@foreach ($stations as $station)
 
-					L.marker([{{$station->longitud}}, {{ $station->latitud }}],{icon:{{ $station->estadoModel->color }}}).addTo(mymap).bindPopup('<ul><li><b>LOCALIDAD:</b> {{ $station->localidad }}</li><li><b>ESTADO:</b> {{ $station->estadoModel->nombre }}</li><li><b>CPACC:</b>{{ $station->cpaccModel->nombre }}</li><li>punto tres</li></ul>');
+					L.marker([{{$station->longitud}}, {{ $station->latitud }}],{icon:{{ $station->estadoModel->color }}}).addTo(mymap).bindPopup('<ul><li><b>LOCALIDAD:</b> {{ $station->localidad }}</li><li><b>ESTADO:</b> {{ $station->estadoModel->nombre }}</li><li><b>CPACC:</b>{{ $station->cpaccModel->nombre }}</li><li><a href="/">hh</a></li></ul>');
 				@endforeach
 				
 
 
 			</script>
     </div>
-    <div class="col-md-1"></div>
+    <div  class="col-md-1"></div>
 </div>
 
 @endsection
